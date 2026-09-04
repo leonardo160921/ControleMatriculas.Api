@@ -73,5 +73,17 @@ namespace ControleMatriculas.Api.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
+        public bool Excluir(int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var resultado = connection.QueryFirstOrDefault<dynamic>(
+                    "dbo.usp_Turma_Excluir",
+                    new { Id = id },
+                    commandType: CommandType.StoredProcedure);
+
+                return resultado != null && resultado.LinhasAfetadas == 1;
+            }
+        }
     }
 }
