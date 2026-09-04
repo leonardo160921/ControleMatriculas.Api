@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using ControleMatriculas.Api.Models;
 using ControleMatriculas.Api.Repositories;
 
 namespace ControleMatriculas.Api.Controllers
@@ -25,7 +26,7 @@ namespace ControleMatriculas.Api.Controllers
             return Ok(resultado);
         }
         [HttpGet]
-        [Route("{id:int}")]
+        [Route("{id:int}", Name = "ObterAlunoPorId")]
         public IHttpActionResult ObterPorId(int id)
         {
             var aluno = _alunoRepository.ObterPorId(id);
@@ -34,6 +35,19 @@ namespace ControleMatriculas.Api.Controllers
                 return NotFound();
 
             return Ok(aluno);
+        }
+        [HttpPost]
+        [Route("")]
+        public IHttpActionResult Inserir(Aluno aluno)
+        {
+            var id = _alunoRepository.Inserir(aluno);
+
+            aluno.Id = id;
+
+            return CreatedAtRoute(
+                "ObterAlunoPorId",
+                new { id = aluno.Id },
+                aluno);
         }
 
     }
