@@ -35,5 +35,16 @@ namespace ControleMatriculas.Api.Controllers
                 Request.RequestUri + "/" + id,
                 turma);
         }
+        [HttpGet]
+        [Route("{id:int}")]
+        public IHttpActionResult ObterPorId(int id)
+        {
+            var turma = _turmaRepository.ObterPorId(id);
+
+            if (turma == null)
+                return NotFound();
+
+            return Ok(turma);
+        }
     }
 }

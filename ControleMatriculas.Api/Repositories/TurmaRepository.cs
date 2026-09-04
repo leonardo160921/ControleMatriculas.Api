@@ -47,5 +47,15 @@ namespace ControleMatriculas.Api.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
+        public Turma ObterPorId(int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return connection.QueryFirstOrDefault<Turma>(
+                    "dbo.usp_Turma_ObterPorId",
+                    new { Id = id },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
