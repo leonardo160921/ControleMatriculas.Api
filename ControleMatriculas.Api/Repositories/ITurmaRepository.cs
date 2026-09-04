@@ -8,5 +8,6 @@ namespace ControleMatriculas.Api.Repositories
         IEnumerable<Turma> Listar();
         int Inserir(Turma turma);
         Turma ObterPorId(int id);
+        void Atualizar(Turma turma);
     }
 }
