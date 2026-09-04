@@ -9,5 +9,6 @@ namespace ControleMatriculas.Api.Repositories
         int Inserir(Turma turma);
         Turma ObterPorId(int id);
         void Atualizar(Turma turma);
+        bool Excluir(int id);
     }
 }

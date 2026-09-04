@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using ControleMatriculas.Api.Models;
 using ControleMatriculas.Api.Repositories;
 
@@ -60,6 +62,27 @@ namespace ControleMatriculas.Api.Controllers
             _turmaRepository.Atualizar(turma);
 
             return Ok(turma);
+        }
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IHttpActionResult Excluir(int id)
+        {
+            var turma = _turmaRepository.ObterPorId(id);
+
+            if (turma == null)
+                return NotFound();
+
+            var excluido = _turmaRepository.Excluir(id);
+
+            if (!excluido)
+            {
+                return ResponseMessage(
+                    Request.CreateErrorResponse(
+                        HttpStatusCode.Conflict,
+                        "Não é possível excluir a turma porque existem matrículas vinculadas."));
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
