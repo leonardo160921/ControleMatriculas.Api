@@ -46,5 +46,20 @@ namespace ControleMatriculas.Api.Controllers
 
             return Ok(turma);
         }
+        [HttpPut]
+        [Route("{id:int}")]
+        public IHttpActionResult Atualizar(int id, Turma turma)
+        {
+            turma.Id = id;
+
+            var turmaExistente = _turmaRepository.ObterPorId(id);
+
+            if (turmaExistente == null)
+                return NotFound();
+
+            _turmaRepository.Atualizar(turma);
+
+            return Ok(turma);
+        }
     }
 }

@@ -57,5 +57,21 @@ namespace ControleMatriculas.Api.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
+        public void Atualizar(Turma turma)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(
+                    "dbo.usp_Turma_Atualizar",
+                    new
+                    {
+                        turma.Id,
+                        turma.Nome,
+                        turma.Periodo,
+                        turma.VagasTotal
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
