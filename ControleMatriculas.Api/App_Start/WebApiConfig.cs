@@ -13,6 +13,7 @@ namespace ControleMatriculas.Api
             var container = new UnityContainer();
 
             container.RegisterType<IAlunoRepository, AlunoRepository>();
+            container.RegisterType<ITurmaRepository, TurmaRepository>();
 
             config.DependencyResolver = new UnityDependencyResolver(container);
 
