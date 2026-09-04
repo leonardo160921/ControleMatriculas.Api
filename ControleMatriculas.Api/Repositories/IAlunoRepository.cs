@@ -10,5 +10,6 @@ namespace ControleMatriculas.Api.Repositories
             string nome);
 
         Aluno ObterPorId(int id);
+        int Inserir(Aluno aluno);
     }
 }

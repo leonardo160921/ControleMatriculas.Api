@@ -67,5 +67,21 @@ namespace ControleMatriculas.Api.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
+        public int Inserir(Aluno aluno)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return connection.QuerySingle<int>(
+                    "dbo.usp_Aluno_Inserir",
+                    new
+                    {
+                        Nome = aluno.Nome,
+                        Email = aluno.Email,
+                        DataNascimento = aluno.DataNascimento,
+                        Ativo = aluno.Ativo
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
