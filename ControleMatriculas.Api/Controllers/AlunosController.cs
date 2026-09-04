@@ -15,10 +15,7 @@ namespace ControleMatriculas.Api.Controllers
 
         [HttpGet]
         [Route("")]
-        public IHttpActionResult Listar(
-            int pagina = 1,
-            int tamanhoPagina = 10,
-            string nome = null)
+        public IHttpActionResult Listar(int pagina = 1, int tamanhoPagina = 10, string nome = null)
         {
             var resultado = _alunoRepository.Listar(
                 pagina,
@@ -27,5 +24,17 @@ namespace ControleMatriculas.Api.Controllers
 
             return Ok(resultado);
         }
+        [HttpGet]
+        [Route("{id:int}")]
+        public IHttpActionResult ObterPorId(int id)
+        {
+            var aluno = _alunoRepository.ObterPorId(id);
+
+            if (aluno == null)
+                return NotFound();
+
+            return Ok(aluno);
+        }
+
     }
 }
