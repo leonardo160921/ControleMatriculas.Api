@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Unity;
+using Unity.WebApi;
+using ControleMatriculas.Api.Repositories;
 
 namespace ControleMatriculas.Api
 {
@@ -9,7 +9,12 @@ namespace ControleMatriculas.Api
     {
         public static void Register(HttpConfiguration config)
         {
-            // Configuração e serviços de API Web
+            // Configuração do Unity
+            var container = new UnityContainer();
+
+            container.RegisterType<IAlunoRepository, AlunoRepository>();
+
+            config.DependencyResolver = new UnityDependencyResolver(container);
 
             // Rotas de API Web
             config.MapHttpAttributeRoutes();
