@@ -100,5 +100,18 @@ namespace ControleMatriculas.Api.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
+        public void Excluir(int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(
+                    "dbo.usp_Aluno_Excluir",
+                    new
+                    {
+                        Id = id
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

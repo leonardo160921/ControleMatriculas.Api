@@ -66,6 +66,19 @@ namespace ControleMatriculas.Api.Controllers
 
             return Ok(alunoAtualizado);
         }
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IHttpActionResult Excluir(int id)
+        {
+            var alunoExistente = _alunoRepository.ObterPorId(id);
+
+            if (alunoExistente == null)
+                return NotFound();
+
+            _alunoRepository.Excluir(id);
+
+            return StatusCode(System.Net.HttpStatusCode.NoContent);
+        }
 
     }
 }

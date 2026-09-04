@@ -13,5 +13,7 @@ namespace ControleMatriculas.Api.Repositories
         int Inserir(Aluno aluno);
 
         void Atualizar(Aluno aluno);
+
+        void Excluir(int id);
     }
 }
