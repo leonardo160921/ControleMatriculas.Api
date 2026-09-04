@@ -8,5 +8,7 @@ namespace ControleMatriculas.Api.Repositories
             int pagina,
             int tamanhoPagina,
             string nome);
+
+        Aluno ObterPorId(int id);
     }
 }

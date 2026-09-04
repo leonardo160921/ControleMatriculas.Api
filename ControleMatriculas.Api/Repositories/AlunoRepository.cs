@@ -19,10 +19,7 @@ namespace ControleMatriculas.Api.Repositories
                     .ConnectionString;
         }
 
-        public AlunoPaginado Listar(
-     int pagina,
-     int tamanhoPagina,
-     string nome)
+        public AlunoPaginado Listar(int pagina, int tamanhoPagina, string nome)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -58,6 +55,16 @@ namespace ControleMatriculas.Api.Repositories
                     Dados = alunos,
                     TotalRegistros = totalRegistros
                 };
+            }
+        }
+        public Aluno ObterPorId(int id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return connection.QueryFirstOrDefault<Aluno>(
+                    "dbo.usp_Aluno_ObterPorId",
+                    new { Id = id },
+                    commandType: CommandType.StoredProcedure);
             }
         }
     }
