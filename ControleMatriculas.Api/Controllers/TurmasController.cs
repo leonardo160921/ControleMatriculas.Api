@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using ControleMatriculas.Api.Models;
 using ControleMatriculas.Api.Repositories;
 
 namespace ControleMatriculas.Api.Controllers
@@ -20,6 +21,19 @@ namespace ControleMatriculas.Api.Controllers
             var turmas = _turmaRepository.Listar();
 
             return Ok(turmas);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public IHttpActionResult Inserir(Turma turma)
+        {
+            var id = _turmaRepository.Inserir(turma);
+
+            turma.Id = id;
+
+            return Created(
+                Request.RequestUri + "/" + id,
+                turma);
         }
     }
 }

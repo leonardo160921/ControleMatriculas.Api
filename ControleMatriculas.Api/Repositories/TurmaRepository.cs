@@ -30,5 +30,22 @@ namespace ControleMatriculas.Api.Repositories
                 ).ToList();
             }
         }
+
+        public int Inserir(Turma turma)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return connection.QuerySingle<int>(
+                    "dbo.usp_Turma_Inserir",
+                    new
+                    {
+                        Nome = turma.Nome,
+                        Periodo = turma.Periodo,
+                        VagasTotal = turma.VagasTotal,
+                        VagasDisponiveis = turma.VagasDisponiveis
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
