@@ -83,5 +83,22 @@ namespace ControleMatriculas.Api.Repositories
                     commandType: CommandType.StoredProcedure);
             }
         }
+        public void Atualizar(Aluno aluno)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Execute(
+                    "dbo.usp_Aluno_Atualizar",
+                    new
+                    {
+                        Id = aluno.Id,
+                        Nome = aluno.Nome,
+                        Email = aluno.Email,
+                        DataNascimento = aluno.DataNascimento,
+                        Ativo = aluno.Ativo
+                    },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }
