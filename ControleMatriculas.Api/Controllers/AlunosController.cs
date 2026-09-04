@@ -49,6 +49,23 @@ namespace ControleMatriculas.Api.Controllers
                 new { id = aluno.Id },
                 aluno);
         }
+        [HttpPut]
+        [Route("{id:int}")]
+        public IHttpActionResult Atualizar(int id, Aluno aluno)
+        {
+            var alunoExistente = _alunoRepository.ObterPorId(id);
+
+            if (alunoExistente == null)
+                return NotFound();
+
+            aluno.Id = id;
+
+            _alunoRepository.Atualizar(aluno);
+
+            var alunoAtualizado = _alunoRepository.ObterPorId(id);
+
+            return Ok(alunoAtualizado);
+        }
 
     }
 }

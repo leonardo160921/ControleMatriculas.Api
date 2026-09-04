@@ -11,5 +11,7 @@ namespace ControleMatriculas.Api.Repositories
 
         Aluno ObterPorId(int id);
         int Inserir(Aluno aluno);
+
+        void Atualizar(Aluno aluno);
     }
 }
